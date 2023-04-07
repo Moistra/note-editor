@@ -1,0 +1,36 @@
+@import "../abstracts/variables.module";
+
+.wrapper {
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 40px;
+
+  margin-bottom: 16px;
+
+  padding: 1em;
+
+  background-color: $color-dark-3xl;
+
+  border-radius: 8px;
+
+  .title {
+    color: $color-primary-light;
+    padding: 12px auto;
+    border-bottom: 2px solid $color-primary;
+  }
+
+  .description {
+    padding: 1em;
+    border: 2px solid $color-dark-m;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 4em;
+    align-self: flex-start;
+    color: $color-light-s;
+    display: flex;
+    align-items: baseline;
+  }
+}

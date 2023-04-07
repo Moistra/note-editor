@@ -1,0 +1,92 @@
+@import "../abstracts/variables.module";
+@import "../components/typography/h3";
+@import "../layout/scroll.module";
+
+
+
+.submit_button{
+  width: 8em;
+
+  position: relative;
+
+  top: -4em;
+  left: 3em;
+}
+
+.wrapper {
+  width: 80vw;
+
+  padding: 2rem 1rem;
+  padding-bottom: calc(2rem + 4em);
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  // justify-content: center;
+
+  background-color: $color-dark-3xl;
+
+  border: 2px solid $color-dark-l;
+  box-shadow: 0 0 16px 4px rgba(103, 115, 128, 0.651);
+  border-radius: 10px;
+
+  h3 {
+    @extend %h3;
+  }
+
+  .input {
+    width: 80%;
+    max-width: 80%;
+
+    margin: 0 auto;
+    padding: 0 1em;
+
+    border: 2px solid $color-dark-m;
+    border-radius: 8px;
+  }
+
+  > textarea {
+    @extend %scroll;
+    resize: vertical;
+    max-width: 80%;
+    width: 80%;
+    height: 15em;
+
+    padding: 10px 1em;
+    margin: 0 auto;
+
+    outline: none;
+    border: 2px solid $color-dark-m;
+
+    background-color: $color-dark-3xl;
+    color: $color-dark-s;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover::placeholder {
+        color: $color-light-xl;
+
+        cursor: pointer;
+      }
+      &:hover {
+        color: $color-light-xl;
+
+        cursor: pointer;
+      }
+    }
+
+    &:focus,
+    &:active {
+      cursor: pointer;
+
+      outline: none;
+      border-bottom: 4px solid $color-primary-light;
+      color: $color-light-xl;
+
+      &::placeholder {
+        color: $color-dark-m;
+      }
+    }
+  }
+}

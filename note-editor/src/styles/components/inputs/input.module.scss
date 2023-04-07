@@ -1,0 +1,42 @@
+@import "../../abstracts/variables.module";
+
+
+.input {
+  padding: 10px;
+
+  outline: none;
+  border: none;
+  border-bottom: 4px solid $color-dark-3xl;
+
+  background-color: $color-dark-3xl;
+  color: $color-dark-s;
+
+
+  @media (hover: hover) and (pointer: fine){
+    &:hover::placeholder{
+      color: $color-light-xl;
+
+      cursor: pointer;
+    }
+    &:hover{
+      color: $color-light-xl;
+
+      cursor: pointer;
+    }
+  }
+
+  &:focus,
+  &:active {
+    cursor: pointer;
+    
+    outline: none;
+    border-bottom: 4px solid $color-primary-light;
+    color: $color-light-xl;
+
+    &::placeholder{
+      color: $color-dark-m;
+    }
+   
+  }
+}
+

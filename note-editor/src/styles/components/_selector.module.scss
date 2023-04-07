@@ -1,0 +1,39 @@
+@import "../abstracts/variables.module";
+@import "../base/normalize";
+
+.selector {
+  width: fit-content;
+
+  padding: 0.2em 1.5em;
+  margin: 0.5rem auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  border: 2px solid $color-dark-s;
+  border-radius: 12px;
+
+  background-color: $color-dark-3xl;
+  color: $color-dark-s;
+
+  .selector__tag_wrapper{
+
+  }
+
+  .selector__input {
+    
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border: 2px solid $color-light-s;
+      color: $color-light-xl;
+
+      box-shadow:0 0 16px 4px rgba(103, 115, 128, 0.651);
+    }
+  }
+}
+

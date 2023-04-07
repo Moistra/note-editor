@@ -1,0 +1,13 @@
+@import "../abstracts/variables.module";
+
+.header {
+  background-color: $color-dark-3xl;
+  color: $color-primary;
+  width: 100%;
+  padding: 0.5em;
+
+
+  .logo{
+    color: $color-primary-light;
+  }
+}

@@ -1,0 +1,44 @@
+@import "../abstracts/variables.module";
+
+
+%scroll {
+  @supports (scrollbar-gutter: stable) {
+    overflow: auto;
+    scrollbar-gutter: stable;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-container {
+      scroll-behavior: smooth;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 2px;
+    background: black;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: $color-primary-light;
+  }
+
+  & {
+    scroll-behavior: smooth;
+  }
+}
+
+
+  body::-webkit-scrollbar {
+    width: 2px;
+    background: $color-dark-3xl;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: $color-primary-light;
+  }
+
+  body {
+    scroll-behavior: smooth;
+  }

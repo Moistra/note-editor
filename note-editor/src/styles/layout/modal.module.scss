@@ -1,0 +1,40 @@
+@import "../abstracts/variables.module";
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  inset: 0;
+  z-index: $modal-background;
+
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(55, 12, 97, 0.562);
+
+  transition: all 0.3s ease-in-out;
+
+  .close_button {
+    // z-index: $modal-background;
+    position: fixed;
+    top: 4em;
+    right: 4em;
+
+    @media (hover: none) {
+      &{
+        display: none;
+      }
+    }
+  }
+
+  .content {
+   max-width: 90vw;
+   padding: 0 auto;
+
+    z-index: $modal-content;
+  }
+}

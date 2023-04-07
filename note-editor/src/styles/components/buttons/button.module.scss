@@ -1,0 +1,55 @@
+@import "../../abstracts/variables.module";
+@import "./button-primal";
+@import "./button-danger";
+
+.button {
+  align-items: center;
+  appearance: none;
+
+  padding: 4px 16px;
+
+  background-color: $color-dark-l;
+  color: $color-dark-m;
+
+  border: 2px solid $color-dark-m;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: border 0.6s ease-in-out, color 0.2s ease-out;
+
+  &:focus {
+    outline: none;
+    border: 2px solid $color-primary-light;
+
+    color: $color-dark-s;
+  }
+
+  @media (hover: hover) and (pointer: fine){
+    &:hover {
+      color: $color-dark-s;
+      
+      outline: none;
+      border: 2px solid $color-primary-light;
+
+      box-shadow:0 0 6px 4px rgba(103, 115, 128, 0.3);
+    }
+  }
+
+  &:active{
+    outline: none;
+    border: 2px solid $color-primary-light;
+    
+    color: $color-light-s;
+
+    box-shadow:0 0 16px 4px rgba(103, 115, 128, 0.651);
+  }
+
+  &.primal {
+    @extend %primal;
+  }
+
+  &.danger {
+    @extend %danger;
+  }
+}
