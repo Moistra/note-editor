@@ -6,6 +6,7 @@
 
   position: relative;
 
+  max-width: 80%;
   width: 20em;
   min-height: 1.5em;
 
@@ -23,6 +24,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5em;
+
+  // overflow: hidden;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -45,6 +48,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.3em;
+
+    width: fit-content;
 
     .value-element {
       padding: 0;
@@ -84,14 +89,12 @@
   }
 
   .caret {
-    border: 0.25em solid transparent;
-    border-top-color: $color-dark-m;
-
-    translate: 0 25%;
+   width: max-content;
   }
 
   .options {
     @extend %scroll;
+
 
     position: absolute;
     left: 0;

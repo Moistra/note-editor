@@ -10,7 +10,7 @@
   position: relative;
 
   top: -4em;
-  left: 3em;
+  left: calc(1rem + 1em);
 }
 
 .wrapper {
@@ -30,7 +30,7 @@
 
   border: 2px solid $color-dark-l;
   box-shadow: 0 0 16px 4px rgba(103, 115, 128, 0.651);
-  border-radius: 10px;
+  border-radius: 12px;
 
   h3 {
     @extend %h3;
@@ -38,19 +38,20 @@
 
   .input {
     width: 80%;
-    max-width: 80%;
 
     margin: 0 auto;
     padding: 0 1em;
+  
+    font-size: 1.5em;
 
     border: 2px solid $color-dark-m;
     border-radius: 8px;
   }
 
-  > textarea {
+  .textarea {
     @extend %scroll;
     resize: vertical;
-    max-width: 80%;
+   
     width: 80%;
     height: 15em;
 
@@ -62,6 +63,8 @@
 
     background-color: $color-dark-3xl;
     color: $color-dark-s;
+
+    font-size: 1em;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover::placeholder {

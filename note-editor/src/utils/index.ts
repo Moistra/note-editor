@@ -1,3 +1,5 @@
 export { generateHashCode } from "./generateHashCode";
-export { convertToTags } from "./searchTags";
+export { searchTags } from "./searchTags";
+export { convertTextToTagElement } from "./convertTextToTagElement";
 export { createWrapperToBody } from "./createWrapperToBody";
+export { hasArray } from "./hasArray";

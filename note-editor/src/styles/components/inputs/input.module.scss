@@ -2,8 +2,10 @@
 
 
 .input {
-  padding: 10px;
+  // padding: 10px;
 
+  min-width: 150px;
+  width: 100%;
   outline: none;
   border: none;
   border-bottom: 4px solid $color-dark-3xl;

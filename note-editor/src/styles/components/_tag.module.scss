@@ -2,11 +2,12 @@
 
 
 .tag{
-  border-radius: 8px;
+  border-radius: 14px;
 
-  padding: 0.3em;
-  // margin: 0 6px;
-
+  padding: 0.1em;
+  
   background-color: $color-primary;
   color: $color-light-xl;
+
+  scale: 0.8;
 }

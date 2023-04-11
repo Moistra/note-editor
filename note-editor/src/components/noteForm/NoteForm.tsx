@@ -1,35 +1,49 @@
 import { ChangeEventHandler, useLayoutEffect, useState } from "react";
-import { convertToTags } from "@utils/";
+import { searchTags, convertTextToTagElement } from "@utils/";
 import { Button, Input } from "@components/";
 import { NoteType } from "../../types";
 
 import style from "@styles/layout/_note-form.module.scss";
 
 interface NoteFormProps {
+  value?: NoteType | null;
   setNotes: (notes: NoteType) => void;
-  type?: 'create' | 'edit'
+  
 }
 
-export function NoteForm({ setNotes, type = 'edit' }: NoteFormProps) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState("");
+export function NoteForm({ setNotes, value = null }: NoteFormProps) {
+
+  const [title, setTitle] = useState(value ? value.title : '');
+  const [description, setDescription] = useState(value ? value.description : '');
+
+
+  const isValidData = () => {
+    if (title.trim().length > 0 && description.trim().replaceAll('#', '').length > 0)
+      return true;
+    else
+      return false;
+  }
 
   const titleHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTitle((prev) => e.target.value);
+    setTitle(prev => e.target.value);
   };
 
   const descriptionHandler: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setDescription((prev) => e.target.value);
+    setDescription(prev => e.target.value);
   };
 
   const onCreateHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    let convertedDescription = convertToTags(description);
+    const tags = searchTags(description);
     const note: NoteType = {
+      id: value ? value.id : Math.random(),
       title: title,
-      description: convertedDescription,
+      description: description,
+      tags: tags,
     };
 
     setNotes(note);
+    setTitle('');
+    setDescription('');
   };
 
   return (
@@ -48,6 +62,7 @@ export function NoteForm({ setNotes, type = 'edit' }: NoteFormProps) {
         ></Input>
 
         <textarea
+          className={style.textarea}
           placeholder="description"
           onChange={descriptionHandler}
           required={true}
@@ -56,11 +71,12 @@ export function NoteForm({ setNotes, type = 'edit' }: NoteFormProps) {
       </div>
 
       <Button
-        typeS="primal"
+        typeS={isValidData() ? 'success' : 'danger'}
+        disabled={!isValidData()}
         onClick={onCreateHandler}
         className={style.submit_button}
       >
-        {type[0].toUpperCase() + type.slice(1)}
+        {value ? 'Edit' : 'Create'}
       </Button>
     </>
   );

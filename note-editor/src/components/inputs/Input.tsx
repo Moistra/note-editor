@@ -5,7 +5,6 @@
 
  interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{ 
   children?: React.ReactNode,
-  typeS?: 'primal' | 'danger',
 }
 
  export function Input({className, children, ...htmlInput}: InputProps) {

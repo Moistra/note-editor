@@ -4,10 +4,16 @@
   background-color: $color-dark-3xl;
   color: $color-primary;
   width: 100%;
-  padding: 0.5em;
+  padding: 0 1em;
+  height: 5vh;
+
+  display: flex;
+  align-items: center;
 
 
   .logo{
     color: $color-primary-light;
+
+    font-size: x-large;
   }
 }

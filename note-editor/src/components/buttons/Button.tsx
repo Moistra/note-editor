@@ -5,7 +5,7 @@ import style from '@styles/components/buttons/button.module.scss'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{ 
   children: React.ReactNode,
-  typeS?: 'primal' | 'danger',
+  typeS?: 'primal' | 'danger' | 'success',
 }
 
 export function Button ({ className, typeS, children, ...htmlButton}: ButtonProps) {

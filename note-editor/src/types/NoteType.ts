@@ -1,8 +1,9 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
 
 export type NoteType = {
+  id: number;
   title: string;
-  description: (string | ReactElement)[];
-  tags?: string[];
+  description: string;
+  tags: string[];
 }

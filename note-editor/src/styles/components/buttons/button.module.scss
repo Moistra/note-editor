@@ -1,10 +1,18 @@
 @import "../../abstracts/variables.module";
 @import "./button-primal";
 @import "./button-danger";
+@import "./button-success";
 
 .button {
+  display: flex;
+  justify-content: center;
   align-items: center;
+
   appearance: none;
+
+  // width: 4em;
+  min-width: 50px;
+  max-width: 200px;
 
   padding: 4px 16px;
 
@@ -51,5 +59,8 @@
 
   &.danger {
     @extend %danger;
+  }
+  &.success{
+    @extend %success;
   }
 }

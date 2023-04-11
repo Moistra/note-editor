@@ -1,36 +1,117 @@
 @import "../abstracts/variables.module";
 
+%edit-buttons{
+  outline: none;
+  background: none;
+  border: none;
+  color: $color-dark-m;
+
+  @media (hover: hover) and (pointer: fine){
+    &:hover{
+      color: $color-light-xl;
+    }
+  }
+
+  &:focus, &:active{
+    color: $color-light-xl;
+  }
+}
+
+
+
 .wrapper {
   display: flex;
-  // flex-wrap: wrap;
+  flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 
-  margin: 40px;
-
-  margin-bottom: 16px;
-
-  padding: 1em;
+  margin: 0 auto;
+  margin-bottom: 1.5em;
 
   background-color: $color-dark-3xl;
 
-  border-radius: 8px;
+  border-radius: 12px;
 
-  .title {
-    color: $color-primary-light;
-    padding: 12px auto;
-    border-bottom: 2px solid $color-primary;
+  width: clamp(300px, 70%, 1000px);
+
+  .edit-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 0.2em;
+
+    justify-content: end;
+
+    padding: 0.5em 0.5em 0 0;
+
+    .edit-button {
+      @extend %edit-buttons;
+    }  
+    .divider {
+      align-self: stretch;
+      width: 0.09em;
+  
+      background-color: $color-dark-m;
+    }
+    .delete-button{
+      @extend %edit-buttons;
+    }
+  }
+
+  .title-wrapper {
+    padding: 1em 0;
+
+    width: 95%;
+    margin: 0 auto;
+
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    align-content: center;
+    justify-content: center;
+
+    .title {
+      color: $color-primary-light;
+
+      margin: 0 auto;
+
+      border-bottom: 2px solid $color-primary;
+    }
   }
 
   .description {
+    margin: 0 auto;
     padding: 1em;
+
+    width: 95%;
+    min-height: 4em;
+
     border: 2px solid $color-dark-m;
     border-radius: 8px;
-    width: 100%;
-    min-height: 4em;
-    align-self: flex-start;
+
     color: $color-light-s;
+
+    align-self: flex-start;
+
+    white-space: pre-wrap;
+  }
+
+  .tags-wrapper{
+    margin: 0.5em auto;
+
+    width: 95%;
+
     display: flex;
-    align-items: baseline;
+    flex-wrap: wrap;
+    flex-direction: row;
+   
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .tag-item{
+        list-style: none;
+        list-style-type: none;
+        scale: 0.8;
+    }
   }
 }

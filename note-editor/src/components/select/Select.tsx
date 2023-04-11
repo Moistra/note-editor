@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Tag } from "@components/";
+import { Tag, Input } from "@components/";
 import { SelectOption } from "@types/";
 
 import style from "@styles/components/selects/select.module.scss";
@@ -26,37 +26,45 @@ export const Select = ({
   options,
   isMultiple,
 }: SelectProps) => {
-
-
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
 
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [sortedOptions, setSortedOptions] = useState<SelectOption[]>(options);
+  const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
-    if (isOpen)
-      setHighlightedIndex(0);
-  }, [isOpen])
+    setSortedOptions(
+      options.filter((option) => option.label.startsWith(searchValue))
+    );
+  }, [searchValue]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setHighlightedIndex(0);
+      if (searchValue === '')
+      setSortedOptions(options);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const accessibilityHandler = (e: KeyboardEvent) => {
-      if (e.target !== containerRef.current)
-        return
-      switch (e.code) { 
+      if (e.target !== containerRef.current) return;
+      switch (e.code) {
         case "Enter":
         case "Space":
-          setIsOpen(prev => !prev);
+          setIsOpen((prev) => !prev);
           if (isOpen) selectOption(options[highlightedIndex]);
           break;
-        case "ArrowUp": 
+        case "ArrowUp":
         case "ArrowDown": {
           if (!isOpen) {
             setIsOpen(true);
             break;
           }
-          const newHighlightIndex = highlightedIndex + (e.code === 'ArrowDown' ? 1 : -1);
+          const newHighlightIndex =
+            highlightedIndex + (e.code === "ArrowDown" ? 1 : -1);
           if (newHighlightIndex >= 0 && newHighlightIndex < options.length)
             setHighlightedIndex(newHighlightIndex);
           break;
@@ -64,14 +72,16 @@ export const Select = ({
         case "Escape":
           setIsOpen(false);
       }
-    }
-    containerRef.current?.addEventListener("keydown", accessibilityHandler)
-
+    };
+    containerRef.current?.addEventListener("keydown", accessibilityHandler);
+    
     return () => {
-      containerRef.current?.removeEventListener("keydown", accessibilityHandler)
-    }
-  }, [isOpen, highlightedIndex, options])
-
+      containerRef.current?.removeEventListener(
+        "keydown",
+        accessibilityHandler
+      );
+    };
+  }, [isOpen, highlightedIndex, options]);
 
   function clearOptions() {
     isMultiple ? onChange([]) : onChange(undefined);
@@ -98,7 +108,9 @@ export const Select = ({
       ref={containerRef}
       tabIndex={0}
       className={style.wrapper}
-      onBlur={() => setIsOpen(false)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setIsOpen(false);
+      }}
       onClick={() => setIsOpen((prev) => !prev)}
     >
       <span className={style.value}>
@@ -124,31 +136,57 @@ export const Select = ({
         onClick={(e) => {
           e.stopPropagation();
           clearOptions();
+          setIsOpen(false);
         }}
         className={style["close-button"]}
       >
-        &times;
+        &#10006;
       </button>
 
       <div className={style.divider}></div>
-      <div className={style.caret}></div>
-      <ul className={`${style.options} ${isOpen ? style.show : ""}`}>
-        {options.map((option, index) => (
-          <li
-            key={option.value}
-            className={`${style.option} 
-              ${isOptionSelected(option) ? style.selected : ""} 
-              ${index === highlightedIndex ? style.highlighted : ''}`}
-            onClick={(e) => {
+      <div className={style.caret}>
+        <Input
+          value={searchValue}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(true);
+          }}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+            setIsOpen(true);
+          }}
+          onKeyDown={(e) => {
+            e.code === "Enter"
+              ? selectOption(sortedOptions[highlightedIndex])
+              : "";
+          }}
+          onFocus={(e) => {
               e.stopPropagation();
-              selectOption(option);
-              setIsOpen(false);
+              setIsOpen(true);
             }}
-            onMouseEnter={() => setHighlightedIndex(index)}
-          >
-            {option.label}
-          </li>
-        ))}
+          placeholder="Search tags.."
+        />
+      </div>
+      <ul className={`${style.options} ${isOpen ? style.show : ""}`}>
+        {sortedOptions.length > 0
+          ? sortedOptions.map((option, index) => (
+              <li
+                key={option.value}
+                className={`${style.option} 
+              ${isOptionSelected(option) ? style.selected : ""} 
+              ${index === highlightedIndex ? style.highlighted : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  selectOption(option);
+                  setSearchValue("");
+                  setIsOpen(false);
+                }}
+                onMouseEnter={() => setHighlightedIndex(index)}
+              >
+                {option.label}
+              </li>
+            ))
+          : <li className={style.option}>Nothing here</li>}
       </ul>
     </div>
   );

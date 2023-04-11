@@ -21,8 +21,8 @@
   .close_button {
     // z-index: $modal-background;
     position: fixed;
-    top: 4em;
-    right: 4em;
+    top: 5vh;
+    right: 5vw;
 
     @media (hover: none) {
       &{

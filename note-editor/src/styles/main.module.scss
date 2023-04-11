@@ -1,25 +1,41 @@
 @import "./base/normalize";
 @import "./abstracts/variables.module";
 @import "./layout/scroll.module";
-@import "./layout/header.module";
-@import "./components/selector.module";
-@import "./layout/note-form.module";
+// @import "./layout/header.module";
+// @import "./layout/note-form.module";
 
-body{
+
   
   .app {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    min-height: 100vh;
-  
-    font-size: 1.5em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     
-    background-color: $color-dark-l;
     
+    max-width: 100vw;
+    width: 100%;
+    overflow: hidden;
 
-    padding-bottom: 5em;
+
+    .content{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    
+      min-height: 95vh;
+    
+      font-size: 1em;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      
+      background-color: $color-dark-l;
+      
+      .functionality{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+
+        padding-bottom: 2em;
+      }
+    }
   }
-}
