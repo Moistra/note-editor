@@ -5,5 +5,6 @@ export { Tag } from "./tag/Tag";
 export { Button } from "./buttons/Button";
 export { Input } from "./inputs/Input";
 export { Modal } from "./modal/Modal";
-export { Portal } from './modal/Portal';
-export { Select } from './select/Select';
+export { Portal } from "./modal/Portal";
+export { Select } from "./select/Select";
+export { Footer } from "./footer/Footer";

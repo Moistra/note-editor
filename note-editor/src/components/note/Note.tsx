@@ -3,16 +3,15 @@ import { NoteType } from "../../types/";
 import { convertTextToTagElement } from "@utils/";
 
 import style from "@styles/layout/note.module.scss";
-import { Tag, Button } from "@components/";
+import { Tag} from "@components/";
 
 interface NoteProp {
-  children?: ReactNode;
   note: NoteType;
   onEdit: () => void;
   onDelete: () => void;
 }
 
-export function Note({ children, note, onEdit, onDelete }: NoteProp) {
+export function Note({ note, onEdit, onDelete }: NoteProp) {
   return (
     <article className={style.wrapper}>
       <div className={style["edit-wrapper"]}>

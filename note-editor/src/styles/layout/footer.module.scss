@@ -1,0 +1,31 @@
+@import "../abstracts/variables.module";
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  min-height: 3vh;
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: $color-dark-3xl;
+
+  .link {
+    color: $color-dark-s;
+    .link-main {
+      color: $color-primary;
+
+      transition: text-shadow 0.3s ease-in-out;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: $color-primary-light;
+          text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+            0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+          transition: text-shadow 0.3s ease-in-out;
+        }
+      }
+    }
+  }
+}

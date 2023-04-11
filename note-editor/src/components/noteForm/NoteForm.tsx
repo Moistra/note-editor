@@ -3,7 +3,7 @@ import { searchTags, convertTextToTagElement } from "@utils/";
 import { Button, Input } from "@components/";
 import { NoteType } from "../../types";
 
-import style from "@styles/layout/_note-form.module.scss";
+import style from "@styles/layout/note-form.module.scss";
 
 interface NoteFormProps {
   value?: NoteType | null;

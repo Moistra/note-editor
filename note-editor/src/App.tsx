@@ -1,26 +1,22 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect} from "react";
 import {
   Header,
   Note,
   NoteForm,
   Modal,
   Button,
-  Select
+  Select,
+  Footer
 } from "@components/";
-
+import { hasArray } from "@utils/";
 import { NoteType, SelectOption } from "@types/";
 
-import {hasArray} from "@utils/"
-
 import style from "@styles/main.module.scss";
-
-
 
 
 function App() {
   const [notes, setNotes] = useState<NoteType[] | null>(null);
   const [tags, setTags] = useState<string[]>([])
-
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [noteForEdit, setNoteForEdit] = useState<NoteType | null>(null);
@@ -67,19 +63,24 @@ function App() {
       <main className={style.content}>
 
         <div className={style.functionality}>
-          <Button
-            onClick={() => {
-            setNoteForEdit(null)
-            setOpenModal(true)
-            }}>Create note
-          </Button>
-          
-          <Select
-          options={tags.map((tag)=> {return {value:tag, label:tag}})}
-          isMultiple = {true}
-          value={selectValue}
-          onChange={option => setSelectValue(option)}
-        />
+          <div className={style["select-input"]}>
+            <Select
+              options={tags.map((tag)=> {return {value:tag, label:tag}})}
+              isMultiple = {true}
+              value={selectValue}
+              onChange={option => setSelectValue(option)}
+            />
+          </div>
+          <div className={style["create-button"]}>
+            <Button
+              onClick={() => {
+                setNoteForEdit(null)
+                setOpenModal(true)
+              }}
+            >
+              Create note
+            </Button>
+          </div>
        </div>
 
         <div>
@@ -100,6 +101,7 @@ function App() {
               />;
         }): ''}
       </main>
+        <Footer></Footer>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import style from '@styles/layout/_header.module.scss';
+import style from '@styles/layout/header.module.scss';
 
 
 
