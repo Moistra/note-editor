@@ -9,9 +9,10 @@ interface NoteProp {
   children?: ReactNode;
   note: NoteType;
   onEdit: () => void;
+  onDelete: () => void;
 }
 
-export function Note({ children, note, onEdit }: NoteProp) {
+export function Note({ children, note, onEdit, onDelete }: NoteProp) {
   return (
     <article className={style.wrapper}>
       <div className={style["edit-wrapper"]}>
@@ -19,7 +20,7 @@ export function Note({ children, note, onEdit }: NoteProp) {
           &#9998;
         </button>
         <div className={style.divider}></div>
-        <button className={style["delete-button"]}>
+        <button className={style["delete-button"]} onClick={() => onDelete()}>
           &#10006;
         </button>
       </div>
@@ -28,20 +29,18 @@ export function Note({ children, note, onEdit }: NoteProp) {
       </div>
 
       <div className={style.description}>
-        <p>{convertTextToTagElement(note.description)}</p>
+        <p>{...convertTextToTagElement(note.description)}</p>
       </div>
 
       <ul className={style["tags-wrapper"]}>
         {note.tags.length > 0
           ? note.tags.map((tag) => (
-              <li key={Math.random()} className={style["tag-item"]}>
+              <li key={tag} className={style["tag-item"]}>
                 <Tag>{tag}</Tag>
               </li>
             ))
           : ""}
       </ul>
-
-      {children}
     </article>
   );
 }

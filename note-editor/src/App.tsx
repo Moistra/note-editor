@@ -4,7 +4,6 @@ import {
   Note,
   NoteForm,
   Modal,
-  Tag,
   Button,
   Select
 } from "@components/";
@@ -24,39 +23,42 @@ function App() {
 
 
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [modalValue, setModalValue] = useState<NoteType | null>(null);
+  const [noteForEdit, setNoteForEdit] = useState<NoteType | null>(null);
 
   const [selectValue, setSelectValue] = useState<SelectOption[]>([]);
-  const [selectOptions, setSelectOptions] = useState<SelectOption[]>([]);
 
-  const updateListOfNotes = (note: NoteType) => {
+  useEffect(() => {
+    if (notes) {
+      let newTags = notes.reduce((updatedTags:string[], note) => {
+        return updatedTags = [...new Set([...updatedTags, ...note.tags])]
+      }, [])
+      setTags(newTags)
+    }
+}, [notes])
+
+
+  const addNewNote = (note: NoteType) => {
     if (notes !== null) 
       setNotes([...notes.filter((oldNote)=> oldNote.id !== note.id), note]);
     else 
       setNotes([note])
     
-    updateListOfTags(note.tags)
+    addNewTags(note.tags)
   };
 
-
-  const updateListOfTags = (newTags: string[]) => {
+  const addNewTags = (newTags: string[]) => {
     setTags([...new Set([...tags, ...newTags])])
   }
 
-  useEffect(() => {
-    console.log(tags)
-    let options: SelectOption[] = []
-    for (let tag of tags) {
-        options.push({value: tag, label: tag})
-    }
-    setSelectOptions(options)
-    console.log(selectOptions)
-  }, [tags]);
-
-
-  const onEditNote = (note: NoteType) => {
-    setModalValue(note)
+  const editNote = (note: NoteType) => {
+    setNoteForEdit(note)
     setOpenModal(true);
+  }
+
+  const deleteNote = (deleteNote: NoteType) => {
+    if (notes) { 
+      setNotes(notes.filter((note) => note.id !== deleteNote.id))
+    }
   }
 
   return (
@@ -64,39 +66,38 @@ function App() {
       <Header />
       <main className={style.content}>
 
-
         <div className={style.functionality}>
-          <Button onClick={() => {
-            setModalValue(null)
+          <Button
+            onClick={() => {
+            setNoteForEdit(null)
             setOpenModal(true)
-          }}>New note</Button>
-        <Select
-          options={selectOptions}
+            }}>Create note
+          </Button>
+          
+          <Select
+          options={tags.map((tag)=> {return {value:tag, label:tag}})}
           isMultiple = {true}
           value={selectValue}
           onChange={option => setSelectValue(option)}
         />
-        </div>
-
-      
-        
+       </div>
 
         <div>
           {isOpenModal && (
             <Modal closeModal={() => setOpenModal(false)} isOpen={isOpenModal}>
-              <NoteForm setNotes={updateListOfNotes} value={modalValue}/>
+              <NoteForm setNotes={addNewNote} value={noteForEdit}/>
             </Modal>
           )}
         </div>
-
-    
 
         {notes !== null
           ? notes.filter((note) => hasArray(note.tags, selectValue.map(el => el.label)))
             .map((note: NoteType) => {
               return <Note key={note.id}
                 note={note}
-                onEdit={() => onEditNote(note)} />;
+                onEdit={() => editNote(note)}
+                onDelete={() => deleteNote(note)}
+              />;
         }): ''}
       </main>
     </div>

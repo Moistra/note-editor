@@ -116,9 +116,8 @@ export const Select = ({
       <span className={style.value}>
         {isMultiple
           ? value.map((el) => (
-              <button className={style["value-element"]}>
+              <button className={style["value-element"]} key={el.value}>
                 <Tag
-                  key={el.value}
                   onClick={(e) => {
                     e.stopPropagation();
                     selectOption(el);
@@ -167,6 +166,7 @@ export const Select = ({
           placeholder="Search tags.."
         />
       </div>
+
       <ul className={`${style.options} ${isOpen ? style.show : ""}`}>
         {sortedOptions.length > 0
           ? sortedOptions.map((option, index) => (
