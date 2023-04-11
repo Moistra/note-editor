@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { NoteType } from "../../types/";
+import { NoteType } from "@customTypes/";
 import { convertTextToTagElement } from "@utils/";
 
 import style from "@styles/layout/note.module.scss";

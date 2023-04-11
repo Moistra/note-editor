@@ -9,7 +9,7 @@ import {
   Footer
 } from "@components/";
 import { hasArray } from "@utils/";
-import { NoteType, SelectOption } from "@types/";
+import { NoteType, SelectOption } from "@customTypes/";
 
 import style from "@styles/main.module.scss";
 

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useLayoutEffect, useState } from "react";
 import { searchTags, convertTextToTagElement } from "@utils/";
 import { Button, Input } from "@components/";
-import { NoteType } from "../../types";
+import { NoteType } from "@customTypes/";
 
 import style from "@styles/layout/note-form.module.scss";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Tag, Input } from "@components/";
-import { SelectOption } from "@types/";
+import { SelectOption } from "@customTypes/";
 
 import style from "@styles/components/selects/select.module.scss";
 
